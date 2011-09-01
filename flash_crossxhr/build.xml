@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="crossxhr" default="compile_static">
+    <taskdef resource="flexTasks.tasks" />
+
+    <property environment="env" />
+    <property name="FLEX_HOME" value="${env.FLEX_HOME}" />
+    <property name="OUTPUT_DIR" value="${basedir}" />
+    <property name="OUTPUT_FILE" value="${OUTPUT_DIR}/crossxhr.swf" />
+    <condition property="MXMLC" value="mxmlc.exe">
+        <os family="windows" />
+    </condition>
+    <condition property="MXMLC" value="mxmlc">
+        <os family="unix" />
+    </condition>
+    <condition property="COMPC" value="compc.exe">
+        <os family="windows" />
+    </condition>
+    <condition property="COMPC" value="compc">
+        <os family="unix" />
+    </condition>
+
+    <target name="compile_static">
+        <exec executable="${FLEX_HOME}/bin/${MXMLC}" failonerror="true">
+            <arg line="-file-specs ${basedir}/HttpRequesterManager.as" />
+            <arg line="-optimize=true" />
+            <arg line="-strict=true" />
+            <arg line="-link-report=true" />
+            <arg line="-output=${OUTPUT_FILE}" />
+        </exec>
+    </target>
+</project>
