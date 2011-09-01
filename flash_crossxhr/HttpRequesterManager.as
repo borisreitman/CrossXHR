@@ -14,7 +14,7 @@ package {
         ExternalInterface.addCallback("addHeader", addHeader); 
         ExternalInterface.addCallback("send", send); 
         ExternalInterface.addCallback("finished", finished); 
-        ExternalInterface.call("eval", "FlashHttpRequest_ready = 1");
+        ExternalInterface.call("eval", "CrossXHR_ready = 1");
         objects = new Object();
     }
 
@@ -31,7 +31,7 @@ package {
     }
 
     public function handler(id:String, status:String, data:String):void {
-        ExternalInterface.call("FlashHttpRequest_handler", id, status, data);
+        ExternalInterface.call("CrossXHR_handler", id, status, data);
     }
     public function finished(id:String):void {
         objects[id] = null;
