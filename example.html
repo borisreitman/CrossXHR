@@ -1,0 +1,53 @@
+<HTML><HEAD><TITLE>CrossXHR demo</TITLE></HEAD><BODY>
+  <script src="crossxhr.js"></script>
+</HEAD><BODY>
+
+<script>
+var request;
+function callback() {
+   if (request.readyState == 4) {
+     try {
+       if (request.status != 200) {
+           alert('error detected 1');
+       } else {
+          // ok, process...
+         alert("got data: "+request.responseText);
+       }
+     } catch(e) {
+         alert('error detected 2');
+     }
+   }
+}
+function test_get() {
+  request = new CrossXHR();
+  request.onreadystatechange = callback;
+  request.open('GET', 'http://www.pliantdev.com/support/test.xml');
+  request.send();
+}
+function test_bad() {
+  request = new CrossXHR();
+  request.onreadystatechange = callback;
+  request.open('GET', 'http://very.bad.url.com/x.xml');
+  request.send();
+}
+
+</script>
+<H1> Cross XHR demo </H1> 
+<EM> This demo requires flash to be installed in your browser </EM>
+
+<p>
+Click the "test cross domain ajax" button to load <a href="http://www.pliantdev.com/support/test.xml">http://www.pliantdev.com/support/test.xml</a> using an AJAX call.
+</p>
+
+<input type=button onclick="test_get()" value="test cross-domain ajax">
+
+<p>
+Click the "test error detection" button to attempt to load an invalid URL "http://www.pliantdev.com/support/does-not-exist.xml"
+</p>
+<input type=button onclick="test_bad()" value="test error detection">
+
+<p> 
+It is instructive to view the HTML source of this page.
+More information can be found at the <a href="http://code.google.com/p/crossxhr/">CrossXHR homepage</a>.
+</p>
+</BODY></HTML> 
